@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS0169: Das Feld "Form1.reader" wird nie verwendet.
+dotnet_diagnostic.CS0169.severity = none
