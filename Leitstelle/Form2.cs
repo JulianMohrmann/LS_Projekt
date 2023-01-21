@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-//Test Kommentar
+
 namespace Leitstelle
 {
     public partial class Form2 : Form
@@ -26,11 +26,12 @@ namespace Leitstelle
         }
         private void button1_Click(object sender, EventArgs e)
         {
-
+                    //Verbindung zur Datenbank
                     string connStr = "Datasource =94.130.133.100;username=LF8Projekt;password=BDbD)dw!Dvv!7q6k;database=LF8Projekt";
                     MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
+                //Vergleicht die Daten in der Datenbank mit den in den Textfeldern zum Anmelden
                 string BEN = Benutzername.Text;
                 BEN = '"' + BEN + '"';
                 string PAS = Passwort.Text;
@@ -38,31 +39,33 @@ namespace Leitstelle
                 string sql = "Select * from `benutzerdaten` Where LS = '1' and `Benutzername` = " + BEN + " and `Passwort` = " + PAS + "";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
-                           while (rdr.Read())
-            {
-                Console.WriteLine(rdr[0]+" -- "+rdr[1]);
-            }
-            int  ID = Convert.ToInt32(rdr[0]);
-            Console.WriteLine(ID);
-            rdr.Close();
-
+                while (rdr.Read())
+                {
+                    Console.WriteLine(rdr[0] + " -- " + rdr[1]);
+                }
+                int ID = Convert.ToInt32(rdr[0]);
+                Console.WriteLine(ID);
+                rdr.Close();
+                //Dafür damit das Zweite Fenster geöffnet wird.
                 if (ID >= 0)
                 {
-                    
+
                     Form1 test = new Form1();
                     test.Show();
                     this.Hide();
                 }
-
-                else{
+                //Ist indirekt Unwichtig.
+                else
+                {
 
                     Console.WriteLine();
                 }
-                
-                
-                
+
+
+
                 conn.Close();
             }
+            //Damit falls man was Falsch gibt eine Fehler Meldung bekommt.
             catch (Exception)
             {
                 MessageBox.Show("Benutzerdaten Falsch");

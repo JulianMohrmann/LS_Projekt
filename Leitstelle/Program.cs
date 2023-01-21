@@ -16,6 +16,7 @@ namespace Leitstelle
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Form2 statt Form1, damit das Anmelde Fenster statt des Normalen Programms geöffnet wird.
             Application.Run(new Form2());
 
         }
